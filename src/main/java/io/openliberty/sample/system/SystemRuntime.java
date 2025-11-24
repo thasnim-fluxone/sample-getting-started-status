@@ -20,6 +20,9 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 import javax.management.ObjectName;
 import javax.management.MBeanInfo;
