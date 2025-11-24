@@ -31,27 +31,44 @@ import javax.management.MBeanServer;
 public class SystemRuntime {
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response getRuntime() {
-		String libertyVersion = getServerVersion();
-		return Response.ok(libertyVersion).build();
-	}
-
-	String getServerVersion() {
-        String version = null;
-        try {
-            MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
-            ObjectName objName = new ObjectName("WebSphere:feature=kernel,name=ServerInfo");
-			MBeanInfo beanInfo = mbs.getMBeanInfo(objName);
-
-			for (MBeanAttributeInfo attr : beanInfo.getAttributes()) {
-				if (attr.getName().equals("LibertyVersion")) {
-					version = String.valueOf(mbs.getAttribute(objName, attr.getName()));
-					break;
-				}
-			}
-        } catch (Exception ex) {
-            System.out.println("Unable to retrieve server version.");
+	public String getFakeCert() throws IOException {
+        Properties props = new Properties();
+        try (FileInputStream in = new FileInputStream(
+                "/var/run/secrets/liberty/variables/ease-variables.properties")) {
+            props.load(in);
         }
-        return version;
+
+        // adjust key name if it's "multiline" instead of "FAKE_CERTIF"
+        String value = props.getProperty("FAKE_CERTIF");
+
+        if (value == null) {
+            return "FAKE_CERTIF not found in ease-variables.properties";
+        }
+
+        return value;
     }
+	// public Response getRuntime() {
+	// 	String libertyVersion = getServerVersion();
+	// 	return Response.ok(libertyVersion).build();
+	// }
+
+	// String getServerVersion() {
+ //        String version = null;
+ //        try {
+ //            MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
+ //            ObjectName objName = new ObjectName("WebSphere:feature=kernel,name=ServerInfo");
+	// 		MBeanInfo beanInfo = mbs.getMBeanInfo(objName);
+
+	// 		for (MBeanAttributeInfo attr : beanInfo.getAttributes()) {
+	// 			if (attr.getName().equals("LibertyVersion")) {
+	// 				version = String.valueOf(mbs.getAttribute(objName, attr.getName()));
+	// 				break;
+	// 			}
+	// 		}
+ //        } catch (Exception ex) {
+ //            System.out.println("Unable to retrieve server version.");
+ //        }
+ //        return version;
+ //    }
+	
 }
