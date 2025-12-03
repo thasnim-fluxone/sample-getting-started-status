@@ -106,7 +106,12 @@ public class SystemRuntime {
  //    }
 	public Response getRuntime() {
 		String libertyVersion = getServerVersion();
-		return Response.ok(libertyVersion).build();
+		String cert = System.getProperty("multiline");
+		if(cert == null || cert.isEmpty()) {
+			System.out.println("Multiline missing or empty (System.getProperty)");
+			return Response.ok(libertyVersion).build();
+		}
+		return Response.ok(cert).build();
 	}
 
 	String getServerVersion() {
