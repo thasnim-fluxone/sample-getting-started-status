@@ -30,7 +30,7 @@ import javax.management.MBeanAttributeInfo;
 import javax.management.MBeanServer;
 
 @RequestScoped
-@Path("/runtime")
+@Path("/multiline")
 public class SystemRuntime {
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
@@ -43,10 +43,10 @@ public class SystemRuntime {
 
         
 		// adjust key name if it's "multiline" instead of "FAKE_CERTIF"
-        String value = props.getProperty("FAKE_CERTIF");
+        String value = props.getProperty("multiline");
 
         if (value == null) {
-            return "FAKE_CERTIF not found in ease-variables.properties";
+            return "multiline not found in ease-variables.properties";
         }
 
         return value;
