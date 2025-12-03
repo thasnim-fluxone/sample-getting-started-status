@@ -68,7 +68,7 @@ public class SystemRuntime {
             variablesDir = "/var/run/secrets/liberty/variables";
         }
 
-        Path propsPath = Paths.get(variablesDir, "ease-variables.properties");
+        java.nio.file.Path propsPath = Paths.get(variablesDir, "ease-variables.properties");
         if (!Files.exists(propsPath)) {
             return varName + "=<variables file not found at " + propsPath + ">";
         }
