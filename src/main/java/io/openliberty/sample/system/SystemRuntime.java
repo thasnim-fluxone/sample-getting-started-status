@@ -47,7 +47,7 @@ public class SystemRuntime {
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public String getFakeCert() throws IOException {
-        String varName = "FAKE_CERTIF";
+        String varName = "multiline";
 
         try {
             String value = readMultilineFromVariablesFile(varName);
