@@ -1,20 +1,10 @@
 package io.openliberty.sample;
 
-// import jakarta.ws.rs.GET;
-// import jakarta.ws.rs.Path;
-// import jakarta.ws.rs.Produces;
-// import jakarta.ws.rs.core.MediaType;
-// import java.io.FileInputStream;
-// import java.io.IOException;
-// import java.util.Properties;
 
-//import jakarta.ws.rs.GET;
 import jakarta.ws.rs.core.Response;
-//import jakarta.ws.rs.core.MediaType;
-//import jakarta.ws.rs.Path;
+
 import jakarta.ws.rs.Produces;
-//import java.io.FileInputStream;
-//import java.io.IOException;
+
 import java.util.Properties;
 
 import jakarta.ws.rs.GET;
@@ -25,7 +15,7 @@ import jakarta.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-// import java.nio.file.Path;
+
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -34,7 +24,7 @@ import javax.management.MBeanInfo;
 import javax.management.MBeanAttributeInfo;
 import javax.management.MBeanServer;
 
-@Path("/fake-cert")   // full path: /api/fake-cert
+@Path("/fake-cert")  
 public class FakeCertResource {
 
     @GET
@@ -44,7 +34,7 @@ public class FakeCertResource {
 
         try {
             String value = readMultilineFromVariablesFile(varName);
-            return value; // already "FAKE_CERTIF=<full-multiline>"
+            return value; 
         } catch (IOException e) {
             return varName + "=<error reading variables file: " + e.getMessage() + ">";
         }
@@ -74,17 +64,15 @@ public class FakeCertResource {
 
         for (String line : lines) {
             if (!inVar) {
-                // Look for the FAKE_CERTIF=... line
+                
                 if (line.startsWith(prefix)) {
                     inVar = true;
-                    // Everything after '=' on this line is the first line of the value
                     String first = line.substring(prefix.length()).stripLeading();
                     value.append(first);
                     value.append('\n');
                 }
             } else {
-                // We’re already inside the value block.
-                // Stop when we hit the next "KEY=" line or a blank line.
+                // Stop when hit the next "KEY=" line or a blank line.
                 if (line.isEmpty() || line.matches("^[A-Za-z0-9_.-]+=.*")) {
                     break;
                 }
@@ -105,22 +93,4 @@ public class FakeCertResource {
         return varName + "=" + value;
     }
 
-    // @GET
-    // @Produces(MediaType.TEXT_PLAIN)
-    // public String getFakeCert() throws IOException {
-    //     Properties props = new Properties();
-    //     try (FileInputStream in = new FileInputStream(
-    //             "/var/run/secrets/liberty/variables/ease-variables.properties")) {
-    //         props.load(in);
-    //     }
-
-    //     // adjust key name if it's "multiline" instead of "FAKE_CERTIF"
-    //     String value = props.getProperty("FAKE_CERTIF");
-
-    //     if (value == null) {
-    //         return "FAKE_CERTIF not found in ease-variables.properties";
-    //     }
-
-    //     return value;
-    // }
 }
