@@ -1,6 +1,6 @@
 <server description="Sample Open Liberty server">
 
-  <variable name="TEST_FAKE_CERTIF" value="${FAKE_CERTIF}" />
+  <variable name="multiline" value="${multiline}" />
   <logging traceSpecification="com.ibm.ws.config.xml.internal.variable=all" />
 
   <featureManager>
