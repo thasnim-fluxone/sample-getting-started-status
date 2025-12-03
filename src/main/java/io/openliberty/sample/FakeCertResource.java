@@ -1,12 +1,38 @@
 package io.openliberty.sample;
 
+// import jakarta.ws.rs.GET;
+// import jakarta.ws.rs.Path;
+// import jakarta.ws.rs.Produces;
+// import jakarta.ws.rs.core.MediaType;
+// import java.io.FileInputStream;
+// import java.io.IOException;
+// import java.util.Properties;
+
+//import jakarta.ws.rs.GET;
+import jakarta.ws.rs.core.Response;
+//import jakarta.ws.rs.core.MediaType;
+//import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+//import java.io.FileInputStream;
+//import java.io.IOException;
+import java.util.Properties;
+
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
-import java.io.FileInputStream;
+
 import java.io.IOException;
-import java.util.Properties;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+// import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+
+import javax.management.ObjectName;
+import javax.management.MBeanInfo;
+import javax.management.MBeanAttributeInfo;
+import javax.management.MBeanServer;
 
 @Path("/fake-cert")   // full path: /api/fake-cert
 public class FakeCertResource {
