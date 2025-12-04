@@ -45,7 +45,6 @@ public class FakeCertResource {
      * We do NOT use java.util.Properties because it only returns the first line.
      */
     private String readMultilineFromVariablesFile(String varName) throws IOException {
-        // Same directory Liberty uses to mount variables (you saw this earlier)
         String variablesDir = System.getenv("VARIABLE_SOURCE_DIR");
         if (variablesDir == null || variablesDir.isBlank()) {
             variablesDir = "/var/run/secrets/liberty/variables";
